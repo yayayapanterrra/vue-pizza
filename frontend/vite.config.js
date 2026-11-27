@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from "url";
 
-import { defineConfig } from "vite";
+import { defineConfig, searchForWorkspaceRoot } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
@@ -10,6 +10,7 @@ export default defineConfig({
     environment: "jsdom",
   },
   resolve: {
+    dedupe: ["vue"],
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
@@ -17,6 +18,12 @@ export default defineConfig({
   server: {
     host: true,
     port: 8080,
+    fs: {
+      allow: [
+        searchForWorkspaceRoot(fileURLToPath(new URL(".", import.meta.url))),
+        fileURLToPath(new URL("../template/src", import.meta.url)),
+      ],
+    },
     proxy: {
       "/api": {
         target: "http://backend:3000/",

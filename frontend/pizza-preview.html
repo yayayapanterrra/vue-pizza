@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Конструктор пиццы</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { createApp, h } from "vue";
+      import "../template/src/sass/libs/normalize.scss";
+      import "../template/src/sass/fonts.scss";
+      import "../template/src/sass/scaffolding.scss";
+      import AppHeader from "../template/src/layouts/AppHeader.vue";
+      import HomeView from "../template/src/views/HomeView.vue";
+
+      createApp({
+        render: () => [h(AppHeader), h(HomeView)],
+      }).mount("#app");
+    </script>
+  </body>
+</html>
